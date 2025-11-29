@@ -58,7 +58,7 @@ export default function Hero({ onSubmit, isLoading }) {
       <div className="max-w-4xl mx-auto w-full">
         <div className="rounded-2xl p-1.5 pt-4 transition-all backdrop-blur-sm"
           style={{ 
-            background: 'rgba(255, 255, 255, 0.03)',
+            background: 'rgba(255, 255, 255, 0.1)',
             border: '1px solid var(--border-subtle)'
           }}>
           

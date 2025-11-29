@@ -1,11 +1,14 @@
-import { CheckCircle, XCircle, AlertTriangle, HelpCircle } from 'lucide-react'
+import { CheckCircle, XCircle, AlertTriangle, HelpCircle, Info } from 'lucide-react'
 import { Badge } from './ui/badge'
 
 const VERDICT_COLORS = {
   TRUE: { bg: 'rgba(0,214,125,0.1)', border: 'rgba(0,214,125,0.3)', text: '#00d67d' },
   FALSE: { bg: 'rgba(255,71,87,0.1)', border: 'rgba(255,71,87,0.3)', text: '#ff4757' },
   MISLEADING: { bg: 'rgba(255,193,7,0.1)', border: 'rgba(255,193,7,0.3)', text: '#ffc107' },
-  UNKNOWN: { bg: 'rgba(96,96,112,0.1)', border: 'rgba(96,96,112,0.3)', text: '#9090a0' }
+  PARTIALLY_TRUE: { bg: 'rgba(255,193,7,0.1)', border: 'rgba(255,193,7,0.3)', text: '#ffc107' },
+  UNKNOWN: { bg: 'rgba(96,96,112,0.1)', border: 'rgba(96,96,112,0.3)', text: '#9090a0' },
+  UNVERIFIABLE: { bg: 'rgba(96,96,112,0.1)', border: 'rgba(96,96,112,0.3)', text: '#9090a0' },
+  NOT_A_CLAIM: { bg: 'rgba(100,149,237,0.1)', border: 'rgba(100,149,237,0.3)', text: '#6495ed' }
 }
 
 export default function ClaimCard({ claim, index }) {
@@ -13,7 +16,9 @@ export default function ClaimCard({ claim, index }) {
 
   const VerdictIcon = claim.verdict === 'TRUE' ? CheckCircle : 
                       claim.verdict === 'FALSE' ? XCircle :
-                      claim.verdict === 'MISLEADING' ? AlertTriangle : HelpCircle
+                      claim.verdict === 'MISLEADING' ? AlertTriangle :
+                      claim.verdict === 'PARTIALLY_TRUE' ? AlertTriangle :
+                      claim.verdict === 'NOT_A_CLAIM' ? Info : HelpCircle
 
   return (
     <div

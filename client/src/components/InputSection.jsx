@@ -29,9 +29,9 @@ export default function InputSection({ onSubmit, isLoading }) {
         Paste the suspicious message below
       </label>
       
-      <Card className="rounded-2xl overflow-hidden transition-all"
+      <Card className="rounded-2xl overflow-hidden transition-all shadow-2xl"
         style={{ 
-          background: 'var(--bg-card)', 
+          background: '#23232f', 
           border: '1px solid var(--border-medium)' 
         }}>
         <CardContent className="p-0">
@@ -50,7 +50,7 @@ export default function InputSection({ onSubmit, isLoading }) {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-5 py-3"
             style={{ 
               borderTop: '1px solid var(--border-subtle)', 
-              background: 'rgba(0,0,0,0.2)' 
+              background: 'rgba(255,255,255,0.03)' 
             }}>
             <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
               {text.length} characters

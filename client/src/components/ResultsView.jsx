@@ -1,16 +1,58 @@
-import { useState } from 'react'
-import { FileText, Globe, MessageCircle, Copy, Share2, ExternalLink, Database } from 'lucide-react'
+import { useState, useRef } from 'react'
+import { FileText, Globe, MessageCircle, Copy, Share2, ExternalLink, Database, Volume2, VolumeX, ChevronDown, ChevronUp } from 'lucide-react'
 import { Button } from './ui/button'
 import { Badge } from './ui/badge'
 import ClaimCard from './ClaimCard'
 
-export default function ResultsView({ result, onReset }) {
+export default function ResultsView({ result, onReset, onClaimClick }) {
   const [copied, setCopied] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [showLongReply, setShowLongReply] = useState(false)
+  const audioRef = useRef(null)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(result.generatedRebuttal)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handlePlayAudio = () => {
+    if (!result.audioUrl) return
+    
+    if (!audioRef.current) {
+      audioRef.current = new Audio(result.audioUrl)
+      audioRef.current.onended = () => setIsPlaying(false)
+      audioRef.current.onerror = () => {
+        setIsPlaying(false)
+        console.error('Failed to play audio')
+      }
+    }
+    
+    if (isPlaying) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      setIsPlaying(false)
+    } else {
+      audioRef.current.play()
+      setIsPlaying(true)
+    }
+  }
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'WhatsAMyth Fact Check',
+          text: result.generatedRebuttal,
+          url: window.location.href
+        })
+      } catch (err) {
+        // User cancelled or share failed
+        console.log('Share cancelled')
+      }
+    } else {
+      handleCopy()
+    }
   }
 
   return (
@@ -87,6 +129,17 @@ export default function ResultsView({ result, onReset }) {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-4 border-b border-subtle bg-black/20">
             <span className="text-sm text-muted">Copy this and share in your group chats</span>
             <div className="flex gap-2 w-full sm:w-auto">
+                {result.audioUrl && (
+                  <Button
+                    onClick={handlePlayAudio}
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 sm:flex-none h-8 text-xs rounded-none border-subtle hover:bg-white/5 hover:text-primary"
+                  >
+                    {isPlaying ? <VolumeX className="w-3.5 h-3.5 mr-2" /> : <Volume2 className="w-3.5 h-3.5 mr-2" />}
+                    {isPlaying ? 'Stop' : 'Listen'}
+                  </Button>
+                )}
                 <Button
                 onClick={handleCopy}
                 variant="outline"
@@ -96,7 +149,12 @@ export default function ResultsView({ result, onReset }) {
                 <Copy className="w-3.5 h-3.5 mr-2" />
                 {copied ? 'Copied!' : 'Copy'}
                 </Button>
-                <Button variant="outline" size="sm" className="flex-1 sm:flex-none h-8 text-xs rounded-none border-subtle hover:bg-white/5 hover:text-primary">
+                <Button 
+                  onClick={handleShare}
+                  variant="outline" 
+                  size="sm" 
+                  className="flex-1 sm:flex-none h-8 text-xs rounded-none border-subtle hover:bg-white/5 hover:text-primary"
+                >
                 <Share2 className="w-3.5 h-3.5 mr-2" />
                 Share
                 </Button>
@@ -106,6 +164,34 @@ export default function ResultsView({ result, onReset }) {
             <pre className="text-base leading-relaxed text-primary whitespace-pre-wrap font-sans">
                 {result.generatedRebuttal}
             </pre>
+            
+            {/* Long Reply Section */}
+            {result.longReply && (
+              <>
+                <button
+                  onClick={() => setShowLongReply(!showLongReply)}
+                  className="flex items-center gap-2 mt-6 text-sm font-medium transition-colors hover:opacity-80"
+                  style={{ color: 'var(--accent-green)' }}
+                >
+                  {showLongReply ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  {showLongReply ? 'Hide detailed explanation' : 'Show detailed explanation'}
+                </button>
+                
+                {showLongReply && (
+                  <div 
+                    className="mt-4 p-4 rounded-lg text-sm leading-relaxed"
+                    style={{ 
+                      background: 'rgba(0,0,0,0.2)', 
+                      borderLeft: '3px solid var(--accent-green)' 
+                    }}
+                  >
+                    <pre className="whitespace-pre-wrap font-sans text-secondary">
+                      {result.longReply}
+                    </pre>
+                  </div>
+                )}
+              </>
+            )}
             </div>
         </div>
       </div>
