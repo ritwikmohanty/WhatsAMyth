@@ -2,7 +2,7 @@ import { Shield } from 'lucide-react'
 import { Button } from './ui/button'
 import ThemeToggle from './ThemeToggle'
 
-export default function Header() {
+export default function Header({ onNavigate, currentPage }) {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -19,7 +19,7 @@ export default function Header() {
       <div className="flex justify-between items-center px-6 md:px-10 py-4 max-w-6xl mx-auto w-full">
         <a 
           href="#" 
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} 
+          onClick={(e) => { e.preventDefault(); onNavigate?.('home'); window.scrollTo({ top: 0, behavior: 'smooth' }) }} 
           className="flex items-center gap-3 no-underline group"
         >
           <div className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors group-hover:bg-accent/10"
@@ -36,7 +36,7 @@ export default function Header() {
         
         <div className="flex items-center gap-8">
           <nav className="hidden md:flex gap-6 items-center">
-            {['How it works', 'Recent Debunks', 'API'].map((item) => (
+            {currentPage === 'home' && ['How it works', 'Recent Debunks'].map((item) => (
               <Button 
                 key={item}
                 variant="ghost" 
@@ -44,13 +44,22 @@ export default function Header() {
                 style={{ color: 'var(--text-secondary)' }}
                 onClick={() => {
                   const id = item.toLowerCase().replace(/ /g, '-')
-                  if (id !== 'api') scrollToSection(id)
+                  scrollToSection(id)
                 }}
               >
                 <span className="group-hover:text-(--text-primary) transition-colors">{item}</span>
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-(--text-primary) transition-all group-hover:w-full" />
               </Button>
             ))}
+            <Button 
+              variant="ghost" 
+              className="h-auto p-0 text-sm font-medium hover:bg-transparent transition-colors relative group"
+              style={{ color: currentPage === 'recent-myths' ? 'var(--accent-green)' : 'var(--text-secondary)' }}
+              onClick={() => onNavigate?.('recent-myths')}
+            >
+              <span className="group-hover:text-(--text-primary) transition-colors">Myth Database</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-(--text-primary) transition-all group-hover:w-full" />
+            </Button>
           </nav>
           
           <div className="h-6 w-px" style={{ background: 'var(--border-subtle)' }} />

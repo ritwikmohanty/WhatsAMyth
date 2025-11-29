@@ -5,11 +5,13 @@ import ProcessingView from './components/ProcessingView'
 import ResultsView from './components/ResultsView'
 import TrendingMyths from './components/TrendingMyths'
 import HowItWorks from './components/HowItWorks'
+import RecentMyths from './components/RecentMyths'
 import Footer from './components/Footer'
 import { simulateAPICall } from './lib/api'
 
 function App() {
   const [view, setView] = useState('home')
+  const [page, setPage] = useState('home')
   const [processingStage, setProcessingStage] = useState(0)
   const [result, setResult] = useState(null)
 
@@ -33,6 +35,14 @@ function App() {
     setProcessingStage(0)
   }
 
+  const navigateTo = (newPage) => {
+    setPage(newPage)
+    setView('home')
+    setResult(null)
+    setProcessingStage(0)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const scrollToCheck = () => {
     document.getElementById('check-section')?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -45,14 +55,18 @@ function App() {
         color: 'var(--text-primary)' 
       }}>
       <div className="noise-overlay"></div>
-      <Header />
+      <Header onNavigate={navigateTo} currentPage={page} />
       
-      {view === 'home' && (
+      {view === 'home' && page === 'home' && (
         <>
           <Hero onSubmit={handleSubmit} isLoading={false} />
           <TrendingMyths />
           <HowItWorks />
         </>
+      )}
+
+      {page === 'recent-myths' && (
+        <RecentMyths />
       )}
 
       {view === 'processing' && (

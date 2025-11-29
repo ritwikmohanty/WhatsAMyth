@@ -1,6 +1,7 @@
 from typing import Optional, List
 from sqlmodel import Field, SQLModel, create_engine, Session, select
 from fastapi import FastAPI, HTTPException, BackgroundTasks, Query
+from fastapi.middleware.cors import CORSMiddleware
 import os
 import requests
 import feedparser
@@ -18,6 +19,15 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")  # set this in environment if using
 USER_AGENT = "WhatsAMyth/1.0 (+https://example.com)"
 
 app = FastAPI(title="WhatsAMyth Backend", version="0.1")
+
+# Enable CORS for frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],  # Vite dev server
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Database models
 class Claim(SQLModel, table=True):
