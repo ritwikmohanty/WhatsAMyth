@@ -109,8 +109,8 @@ class RebuttalGenerator:
             status_line = f"{emoji} *UNVERIFIED*"
             warning = "\n\n⚠️ *Check official sources*"
 
-        # Extract claim summary (first 100 chars)
-        claim_summary = claim_text[:100] + "..." if len(claim_text) > 100 else claim_text
+        # Extract claim summary (first 1000 chars)
+        claim_summary = claim_text
 
         # Build Myth/Fact section
         if status == ClaimStatus.FALSE:
@@ -209,8 +209,8 @@ class RebuttalGenerator:
         sentences = re.split(r'[.!?]+', claim_text)
         summary = '. '.join(sentences[:2]).strip()
 
-        if len(summary) > 200:
-            summary = summary[:197] + "..."
+        if len(summary) > 2000:
+            summary = summary
 
         return summary
 

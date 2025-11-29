@@ -186,23 +186,28 @@ def ingest_message(
     
     # Step 9: Generate TTS if we have a reply
     audio_url = None
-    if verdict and verdict.short_reply:
+    # DISABLED: TTS causes hanging issues on Windows with pyttsx3
+    # if verdict and verdict.short_reply:
+    #     try:
+    #         tts_service = get_tts_service()
+    #         audio_path = tts_service.generate(
+    #             text=verdict.short_reply,
+    #             message_id=message.id
+    #         )
+    #
+    #         if audio_path:
+    #             audio_url = tts_service.get_audio_url(audio_path)
+    #
+    #             # Update verdict with audio path
+    #             verdict.audio_path = audio_path
+    #             db.commit()
+    #
+    #             logger.info(f"Generated TTS audio: {audio_url}")
+    #
+    #     except Exception as e:
+    if False:  # Placeholder to keep the except block
         try:
-            tts_service = get_tts_service()
-            audio_path = tts_service.generate(
-                text=verdict.short_reply,
-                message_id=message.id
-            )
-            
-            if audio_path:
-                audio_url = tts_service.get_audio_url(audio_path)
-                
-                # Update verdict with audio path
-                verdict.audio_path = audio_path
-                db.commit()
-                
-                logger.info(f"Generated TTS audio: {audio_url}")
-                
+            pass
         except Exception as e:
             logger.error(f"TTS generation failed: {e}")
     

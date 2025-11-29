@@ -37,7 +37,7 @@ class TelegramBot:
     def __init__(
         self,
         token: str,
-        backend_url: str = "http://localhost:8000",
+        backend_url: str = "http://localhost:8001",
         internal_token: str = ""
     ):
         """
@@ -80,8 +80,8 @@ class TelegramBot:
             MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_message)
         )
         
-        # Create HTTP client
-        self._client = httpx.AsyncClient(timeout=60.0)
+        # Create HTTP client with redirect following and longer timeout
+        self._client = httpx.AsyncClient(timeout=180.0, follow_redirects=True)
         
         logger.info("Telegram bot setup complete")
     

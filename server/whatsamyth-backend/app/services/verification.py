@@ -538,9 +538,11 @@ class VerificationService:
         )
         if short_match:
             short_reply = short_match.group(1).strip()
-            # Truncate for WhatsApp
-            if len(short_reply) > 200:
-                short_reply = short_reply[:197] + "..."
+            logger.info(f"Parsed short_reply length: {len(short_reply)} chars")
+            logger.info(f"Short reply content: {short_reply[:300]}...")
+            # Truncate for messaging platforms (Telegram limit: 4096)
+            if len(short_reply) > 2000:
+                short_reply = short_reply[:1997] + "..."
 
         # Parse LONG_REPLY
         long_match = re.search(

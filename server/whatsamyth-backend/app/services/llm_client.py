@@ -596,7 +596,7 @@ Your response:"""
         response = client.generate(
             prompt,
             system_prompt=system_prompt,
-            max_tokens=800,
+            max_tokens=2000,
             temperature=0.3
         )
 
@@ -651,7 +651,7 @@ Explanation (2–3 sentences):"""
 
         short_reply = client.generate(
             reply_prompt,
-            max_tokens=150,
+            max_tokens=500,
             temperature=0.5
         ).strip()
 

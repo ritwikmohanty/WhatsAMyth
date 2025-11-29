@@ -34,7 +34,7 @@ class DiscordBot(commands.Bot):
     def __init__(
         self,
         token: str,
-        backend_url: str = "http://localhost:8000",
+        backend_url: str = "http://localhost:8001",
         internal_token: str = "",
         command_prefix: str = "!myth "
     ):
