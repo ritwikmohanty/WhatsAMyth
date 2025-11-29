@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"\nfrom app.services.llm_client import get_llm_client\n\nprint(''''Testing OpenRouter with DeepSeek R1...'''')\nprint(''''=''''*60)\n\nclient = get_llm_client()\nprint(f''''Client type: {type(client).__name__}'''')\n\nif hasattr(client, ''''model''''):\n    print(f''''Model: {client.model}'''')\nif hasattr(client, ''''base_url''''):\n    print(f''''Base URL: {client.base_url}'''')\n\nprint(f''''Is available: {client.is_available()}'''')\n\nif client.is_available():\n    print()\n    print(''''Testing simple generation...'''')\n    result = client.generate(''''Say hello in one sentence.'''')\n    print(f''''Response: {result}'''')\n    print()\n    print(''''[OK] OpenRouter connection successful!'''')\nelse:\n    print()\n    print(''''[FAIL] OpenRouter not available'''')\n\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

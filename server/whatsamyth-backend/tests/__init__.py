@@ -1,0 +1,3 @@
+"""
+WhatsAMyth Test Suite
+"""

@@ -1,0 +1,182 @@
+####################################################################################################
+# TESTING DEADLY REBUTTAL SYSTEM WITH MULTIPLE WHATSAPP FORWARDS
+####################################################################################################
+
+====================================================================================================
+TEST: WhatsApp Shutdown Hoax (Short)
+====================================================================================================
+
+[Detection] Is claim: True
+
+[Canonical] WhatsApp will be off from tonight. PM Modi declared. Forward to all contacts or account will be dele...
+
+[Topics] ['technology', 'misinformation']
+
+[Keywords] ['whatsapp', 'off', 'tonight', 'modi', 'declared']
+
+====================================================================================================
+SHORT REPLY (WhatsApp-ready):
+====================================================================================================
+**
+❌ *FALSE - This is a HOAX!*
+
+*Myth:* PM Modi declared WhatsApp will shut down tonight, deleting accounts if users don't forward a specific message.
+
+*Fact:* WhatsApp has no policy for shutting down or deleting accounts based on message forwarding. The claim about a PM Modi declaration is false and has been debunked by official sources like PIB Fact Check.
+
+*Why this is dangerous:* This hoax causes unnecessary panic, wastes time, and distracts from real news.
+
+⚠️ *DO NOT FORWARD*
+
+✅ *Verified by:* PIB Fact Check (Evidence #2), WhatsApp Official Information (Evidence #1)
+
+**
+
+[Quality Check]
+  ✓ Has emoji: True
+  ✓ Has bold: True
+  ✓ Has warning: True
+  ✓ Has source: True
+  ✅ DEADLY REBUTTAL WORKING!
+
+====================================================================================================
+TEST: Vaccine Microchip (Long)
+====================================================================================================
+
+[Detection] Is claim: True
+
+[Canonical] URGENT: COVID-19 vaccines contain tracking microchips! Bill Gates and WHO are using vaccines to trac...
+
+[Topics] ['health', 'politics', 'science', 'misinformation']
+
+[Keywords] ['covid', 'vaccines', 'tracking', 'government', 'confirmed']
+
+====================================================================================================
+SHORT REPLY (WhatsApp-ready):
+====================================================================================================
+❌ *FALSE - This is a HOAX!*
+
+*Myth:* COVID-19 vaccines contain tracking microchips implanted to monitor location via nanotechnology, enabled by Bill Gates and WHO.
+
+*Fact:* The CDC and WHO confirm COVID-19 vaccines contain standard ingredients like mRNA, lipids, salts, and sugars, with no microchips, nanotechnology, or tracking devices. Bill Gates has repeatedly denied involvement in such conspiracy theories, which have been thoroughly debunked by fact-checkers.
+
+*Why this is dangerous:* This claim spreads dangerous misinformation about vaccines, potentially discouraging people from getting vaccinated and causing unnecessary fear.
+
+⚠️ *DO NOT FORWARD*
+✅ *Verified by:* CDC, WHO, Fact-checkers
+
+[Quality Check]
+  ✓ Has emoji: True
+  ✓ Has bold: True
+  ✓ Has warning: True
+  ✓ Has source: True
+  ✅ DEADLY REBUTTAL WORKING!
+
+====================================================================================================
+TEST: Onion Heatstroke Prevention (Short)
+====================================================================================================
+
+[Detection] Is claim: True
+
+[Canonical] Keep onion in your pocket to prevent heatstroke. Works 100%. Doctors confirmed. Forward urgently!...
+
+[Topics] ['health', 'misinformation']
+
+[Keywords] ['prevent', 'confirmed', 'keep', 'onion', 'your']
+
+====================================================================================================
+SHORT REPLY (WhatsApp-ready):
+====================================================================================================
+**
+❌ *FALSE - This is a HOAX!*
+
+*Myth:* Keeping an onion in your pocket prevents heatstroke with 100% effectiveness, confirmed by doctors.
+
+*Fact:* There is no scientific evidence supporting the claim that an onion in one's pocket prevents heatstroke. Health authorities like the NDMA recommend proven methods such as staying hydrated, wearing light clothing, and seeking shade. Medical experts advise using water and oral rehydration solutions (ORS) for heat prevention and treatment, not onions.
+
+*Why this is dangerous:* Relying on this myth might lead people to neglect scientifically proven methods for preventing heatstroke, increasing their risk.
+
+⚠️ *DO NOT FORWARD*
+
+✅ *Verified by:* National Disaster Management Authority (NDMA), World Health Organization (WHO) guidelines on heatstroke prevention.
+
+**
+
+[Quality Check]
+  ✓ Has emoji: True
+  ✓ Has bold: True
+  ✓ Has warning: True
+  ✓ Has source: True
+  ✅ DEADLY REBUTTAL WORKING!
+
+====================================================================================================
+TEST: False Arrest Notification (Medium)
+====================================================================================================
+
+[Detection] Is claim: True
+
+[Canonical] BREAKING NEWS: Government has ordered arrest of anyone sharing anti-national messages on WhatsApp. P...
+
+[Topics] ['politics', 'technology', 'misinformation']
+
+[Keywords] ['government', 'arrest', 'whatsapp', 'messages', 'breaking']
+
+====================================================================================================
+SHORT REPLY (WhatsApp-ready):
+====================================================================================================
+❌ *FALSE - This is a HOAX!*
+
+*Myth:* The government has issued an order to arrest people sharing anti-national messages on WhatsApp and will track messages from 12 AM with a penalty of 5 years and a fine.
+
+*Fact:* No such order exists. The Home Ministry has not issued any directive for tracking WhatsApp messages without legal procedure, and the penalty mentioned is not applicable. PIB Fact Check confirmed this is fake news.
+
+*Why this is dangerous:* It creates unnecessary fear and panic among citizens and can be used to suppress legitimate dissent.
+
+⚠️ *DO NOT FORWARD*
+
+✅ *Verified by:* PIB Fact Check, general knowledge of police procedures in India.
+
+[Quality Check]
+  ✓ Has emoji: True
+  ✓ Has bold: True
+  ✓ Has warning: True
+  ✓ Has source: True
+  ✅ DEADLY REBUTTAL WORKING!
+
+====================================================================================================
+TEST: 5G Tower Health Risk (Long)
+====================================================================================================
+
+[Detection] Is claim: True
+
+[Canonical] ATTENTION: 5G towers are being installed in your area and causing serious health issues! Scientists ...
+
+[Topics] ['health', 'politics', 'science', 'technology']
+
+[Keywords] ['proven', 'radiation', 'covid', 'government', 'towers']
+
+====================================================================================================
+SHORT REPLY (WhatsApp-ready):
+====================================================================================================
+❌ *FALSE - This is a HOAX!*
+
+*Myth:* The claim falsely states that 5G technology causes serious health issues like cancer, brain damage, COVID-19 spread, bird deaths, and weakened immune systems, and that governments hide this information due to telecom company influence.
+
+*Fact:* The evidence shows WHO confirms 5G radiation is safe within established international exposure guidelines. Multiple scientific studies have found no causal link between 5G and the listed health problems. The claim's assertions about government conspiracy and bird deaths are unfounded, as no credible evidence supports these points.
+
+*Why this is dangerous:* This claim spreads dangerous misinformation that could cause unnecessary public panic and potentially lead people to demand the removal of essential telecommunications infrastructure.
+
+⚠️ *DO NOT FORWARD*
+✅ *Verified by:* World Health Organization (WHO), International Commission on Non-Ionizing Radiation Protection (ICNIRP)
+
+[Quality Check]
+  ✓ Has emoji: True
+  ✓ Has bold: True
+  ✓ Has warning: True
+  ✓ Has source: True
+  ✅ DEADLY REBUTTAL WORKING!
+
+
+####################################################################################################
+# TEST COMPLETE
+####################################################################################################

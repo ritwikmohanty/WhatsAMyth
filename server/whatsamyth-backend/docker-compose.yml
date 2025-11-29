@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: whatsamyth-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: whatsamyth
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: whatsamyth-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    container_name: whatsamyth-web
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/whatsamyth
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=${SECRET_KEY:-changeme-in-production}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN:-}
+      - INTERNAL_TOKEN=${INTERNAL_TOKEN:-internal-secret-token}
+      - LLM_BACKEND=${LLM_BACKEND:-local_transformers}
+      - OLLAMA_URL=${OLLAMA_URL:-http://host.docker.internal:11434}
+      - FAISS_INDEX_PATH=/data/faiss.index
+      - MEMORY_GRAPH_PATH=/data/memory_graph.json
+      - TTS_PROVIDER=${TTS_PROVIDER:-pyttsx3}
+      - FRONTEND_ORIGIN=${FRONTEND_ORIGIN:-http://localhost:3000}
+      - ENABLE_BOTS=${ENABLE_BOTS:-false}
+    volumes:
+      - ./media:/app/media
+      - faiss_data:/data
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  faiss_data:

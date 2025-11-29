@@ -1,0 +1,255 @@
+{
+  "info": {
+    "name": "WhatsAMyth API",
+    "description": "API collection for WhatsAMyth misinformation detection backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "internalToken",
+      "value": "internal-secret-token",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Info",
+      "item": [
+        {
+          "name": "Root",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/"
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "Ingest Message (Web Form)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/messages/",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Scientists have discovered that drinking warm water kills coronavirus instantly.\",\n  \"source\": \"web_form\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Ingest Message (Telegram)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/messages/",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Internal-Token",
+                "value": "{{internalToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"5G towers are spreading COVID-19 according to leaked government documents\",\n  \"source\": \"telegram\",\n  \"metadata\": {\n    \"chat_id\": \"123456\",\n    \"user_id\": \"789\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Ingest Non-Claim Message",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/messages/",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Hello, how are you doing today?\",\n  \"source\": \"web_form\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Ingest Health Misinformation",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/messages/",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"COVID-19 vaccines contain microchips that the government uses to track people. This has been confirmed by leaked documents.\",\n  \"source\": \"web_form\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Claims",
+      "item": [
+        {
+          "name": "List Claims",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/claims/?limit=20&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "claims", ""],
+              "query": [
+                {"key": "limit", "value": "20"},
+                {"key": "offset", "value": "0"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Claims (Filter by Status)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/claims/?status=FALSE&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "claims", ""],
+              "query": [
+                {"key": "status", "value": "FALSE"},
+                {"key": "limit", "value": "10"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Claim Detail",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/claims/1"
+          }
+        },
+        {
+          "name": "Get Similar Claims",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/claims/1/similar?limit=5"
+          }
+        },
+        {
+          "name": "Get Cluster Messages",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/claims/1/messages?limit=50"
+          }
+        },
+        {
+          "name": "Re-verify Claim",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/claims/1/reverify"
+          }
+        },
+        {
+          "name": "Get Reemergence Predictions",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/claims/predictions/reemergence?limit=5"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Statistics",
+      "item": [
+        {
+          "name": "Overview",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/stats/overview"
+          }
+        },
+        {
+          "name": "Trends (7 days)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/stats/trends?days=7"
+          }
+        },
+        {
+          "name": "Trends (30 days)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/stats/trends?days=30"
+          }
+        },
+        {
+          "name": "Source Breakdown",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/stats/sources"
+          }
+        },
+        {
+          "name": "Topic Breakdown",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/stats/topics"
+          }
+        },
+        {
+          "name": "Verification Rate",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/stats/verification-rate"
+          }
+        },
+        {
+          "name": "Activity Heatmap",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/stats/activity-heatmap?days=7"
+          }
+        },
+        {
+          "name": "Graph Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/stats/graph-stats"
+          }
+        },
+        {
+          "name": "Recent Activity",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/stats/recent-activity?limit=10"
+          }
+        }
+      ]
+    }
+  ]
+}

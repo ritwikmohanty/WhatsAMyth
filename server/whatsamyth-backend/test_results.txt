@@ -1,0 +1,44 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Device set to use cpu
+
+####################################################################################################
+# TESTING DEADLY REBUTTAL SYSTEM WITH MULTIPLE WHATSAPP FORWARDS
+####################################################################################################
+
+====================================================================================================
+TEST: WhatsApp Shutdown Hoax (Short)
+====================================================================================================
+
+[Detection] Is claim: True
+
+[Canonical] WhatsApp will be off from tonight. PM Modi declared. Forward to all contacts or account will be dele...
+
+[Topics] ['technology', 'misinformation']
+
+[Keywords] ['whatsapp', 'off', 'tonight', 'modi', 'declared']
+
+====================================================================================================
+SHORT REPLY (WhatsApp-ready):
+====================================================================================================
+Traceback (most recent call last):
+  File "C:\Users\baner\Downloads\backendwam\whatsamyth-backend\test_multiple_forwards.py", line 154, in <module>
+    test_forward(test_case)
+    ~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\baner\Downloads\backendwam\whatsamyth-backend\test_multiple_forwards.py", line 124, in test_forward
+    print(short)
+    ~~~~~^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 0: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\baner\Downloads\backendwam\whatsamyth-backend\test_multiple_forwards.py", line 156, in <module>
+    print(f"\n\u274c ERROR: {e}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 2: character maps to <undefined>
