@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+feedparser
+requests
+python-dotenv
+pydantic
