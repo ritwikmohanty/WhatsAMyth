@@ -719,7 +719,7 @@ MIT License - see LICENSE file for details
 ## 👥 Contributors
 
 1. **Ritwik Mohanty**
-2. **Shashank Satish**
+2. **Shashank Sathish**
 3. **Suryanshu Banerjee**
 4. **Vedant Walunj**
 
